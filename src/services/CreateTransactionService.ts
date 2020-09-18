@@ -8,7 +8,7 @@ import TransactionsRepository from '../repositories/TransactionsRepository';
 interface Request {
   title: string;
   value: number;
-  type: string;
+  type: 'income' | 'outcome';
   category: string;
 }
 
@@ -40,7 +40,7 @@ class CreateTransactionService {
     });
 
     if (!selectedCategory) {
-      selectedCategory = await categoriesRepository.create({
+      selectedCategory = categoriesRepository.create({
         title: category,
       });
 

@@ -48,7 +48,7 @@ transactionsRouter.delete('/:id', async (request, response) => {
 
   await deleteTransactionService.execute({ id });
 
-  return response.json('');
+  return response.status(204).send('');
 });
 
 transactionsRouter.post(
@@ -58,10 +58,10 @@ transactionsRouter.post(
     const importTransactionsService = new ImportTransactionsService();
 
     const data = await importTransactionsService.execute({
-      csvFilename: request.file.filename,
+      csvPath: request.file.path,
     });
 
-    response.json(data);
+    response.status(201).send(data);
   },
 );
 
