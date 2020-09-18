@@ -26,6 +26,15 @@ class CreateTransactionService {
       throw new AppError('Type not valid.');
     }
 
+    if (type === 'outcome') {
+      const checkIsPossibleOutcomeTransaction = await transactionsRepository.checkIsPossibleOutcomeTransaction(
+        value,
+      );
+
+      if (!checkIsPossibleOutcomeTransaction)
+        throw new AppError('This transaction is not possible');
+    }
+
     let selectedCategory = await categoriesRepository.findOne({
       title: category,
     });

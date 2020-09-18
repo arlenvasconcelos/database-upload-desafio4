@@ -46,7 +46,6 @@ transactionsRouter.delete('/:id', async (request, response) => {
   await deleteTransactionService.execute({ id });
 
   return response.json('');
-  // TODO
 });
 
 transactionsRouter.post('/import', async (request, response) => {

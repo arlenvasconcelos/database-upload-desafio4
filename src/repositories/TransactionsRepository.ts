@@ -27,6 +27,14 @@ class TransactionsRepository extends Repository<Transaction> {
     balance.total = balance.income - balance.outcome;
     return balance;
   }
+
+  public async checkIsPossibleOutcomeTransaction(
+    value: number,
+  ): Promise<boolean> {
+    const balance = await this.getBalance();
+    if (balance.total < value) return false;
+    return true;
+  }
 }
 
 export default TransactionsRepository;
